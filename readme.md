@@ -9,32 +9,53 @@
 
 ## Package Requirements
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+- PHP >= 5.6.4
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Mbstring PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+## About Laravel
 
-## Learning Laravel
+Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. Larval aims to make the development process a pleasant one for the developer without sacrificing application functionality. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+- Simple, fast routing engine.
+- Powerful dependency injection container.
+- Multiple back-ends for session and cache storage.
+- Expressive, intuitive database ORM.
+- Database agnostic schema migrations.
+- Robust background job processing.
+- Real-time event broadcasting.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+## LaraAdmin(version 5.4)
 
-## Contributing
+LaraAdmin is a Laravel Admin Panel that controls Models, Data and their Role Permissions without coding, focusing completely on data representation other than data handling. The admin Panel allows us to create, update, read and delete records from the database.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+### Features:
 
-## Security Vulnerabilities
+- User authentication
+- Dashboard
+- Can create modules and permissions and associate permissions to user
+- Can handle permission on each page
+- Store All Activity Logs
+- Listing & Searching with Advance Data tables: https://datatables.yajrabox.com/
+- Fully customizable and easy to extend
+- 100% object oriented
+- The code is fully tested
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+### Ready-built CRUDs/Modules
 
-## License
+- Manage Admin Users
+- Manage Admin Actions (Activity Log Types)
+- Manage Counties
+- Manage States
+- Manage Cities	
+- Permission Modules:
+	1. Manage Modules
+	2. Manage Module Sub Pages/Actions
+	3. Assign User Rights
+- Edit Profile	
+- Change Password
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
