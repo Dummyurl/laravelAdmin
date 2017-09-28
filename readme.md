@@ -1,4 +1,5 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img width="150"src="https://laravel.com/laravel.png"></a></p>
+<p align="center"><a href="http://www.phpdots.com" target="_blank"><img width="150"src="https://www.phpdots.com/wp-content/uploads/2017/09/logo-color-change.png"></a>
+</p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
