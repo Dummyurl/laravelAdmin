@@ -84,5 +84,9 @@ class AdminAction extends Model
     
     public $CHANGE_PASSWORD_ADMIN_USERS = 39; 
 
+    public $ADD_CMS_PAGES = 40;
+    public $EDIT_CMS_PAGES = 41;
+    public $DELETE_CMS_PAGES = 42;  
+
 
 }

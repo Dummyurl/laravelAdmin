@@ -89,6 +89,9 @@ Route::group(['prefix' => $ADMIN_PREFIX], function(){
 
  	Route::any('blog-posts/data', 'admin\BlogPostsController@data')->name('blog-posts.data');
  	Route::resource('blog-posts', 'admin\BlogPostsController');
+
+ 	Route::any('cms-pages/data', 'admin\CmsPagesController@data')->name('cms-pages.data');
+ 	Route::resource('cms-pages', 'admin\CmsPagesController');
         
     });    
 });
