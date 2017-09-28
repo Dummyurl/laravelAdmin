@@ -1,4 +1,4 @@
-<p align="center"><a href="http://www.phpdots.com" target="_blank"><img src="https://www.phpdots.com/wp-content/uploads/2017/09/logo-color-change.png"></a>
+<p align="center"><a href="http://www.phpdots.com" target="_blank"><img height="250px" src="https://www.phpdots.com/wp-content/uploads/2017/09/logo-color-change.png"></a>
 </p>
 
 <p align="center">
