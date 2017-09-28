@@ -1,5 +1,6 @@
 @extends('admin.layouts.app')
 
+
 @section('content')
 
 <!-- BEGIN PAGE CONTENT BODY -->
@@ -8,7 +9,7 @@
 
         <div class="col-md-12">
             
-            @include($moduleViewName.".search")           
+           @include($moduleViewName.".search")
 
             <div class="clearfix"></div>    
             <div class="portlet box green">
@@ -19,19 +20,17 @@
                   
                     @if($btnAdd)
                         <a class="btn btn-default pull-right btn-sm mTop5" href="{{ $add_url }}">Add New</a>
-                    @endif                     
+                    @endif 
 
                 </div>
                 <div class="portlet-body">                    
                     <table class="table table-bordered table-striped table-condensed flip-content" id="server-side-datatables">
                         <thead>
                             <tr>
-                               <th width="5%">ID</th>
-                               <th width="15%">User Type</th>                                   
-                               <th width="20%">FullName</th>                           
-                               <th width="28%">Email</th>                           
-                               <th width="20%">Created At</th>                           
-                               <th width="10%" data-orderable="false">Action</th>
+                               <th width="5%">ID</th>                                   
+                               <th width="70%">Title</th>                                                       
+                               <th width="20%">Created At</th>                                                   
+                               <th width="5%" data-orderable="false">Action</th>
                             </tr>
                         </thead>                                         
                         <tbody>
@@ -42,9 +41,27 @@
         </div>
     </div>
 </div>
+</div>
+<div class="modal fade bs-modal-lg" id="myModal" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Description</h4>
+        </div>
+        <div class="modal-body">
+          <div id="review_desc_detail"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
 </div>            
 @endsection
-
 @section('styles')
   
 @endsection
@@ -54,7 +71,11 @@
     
 
     $(document).ready(function(){
-
+        $(document).on("click",".description-link",function(){
+            $id = $(this).attr("id");
+            $("#review_desc_detail").html($('#hidden_'+$id).html());
+            $("#myModal").modal();
+        });
 
         $("#search-frm").submit(function(){
             oTableCustom.draw();
@@ -75,18 +96,16 @@
                     data.search_start_date = $("#search-frm input[name='search_start_date']").val();
                     data.search_end_date = $("#search-frm input[name='search_end_date']").val();
                     data.search_id = $("#search-frm input[name='search_id']").val();
-                    data.user_type_id = $("#search-frm select[name='user_type_id']").val();
-                    data.search_fnm = $("#search-frm input[name='search_fnm']").val();
-                    data.search_email = $("#search-frm input[name='search_email']").val();
+                    data.search_text = $("#search-frm input[name='search_text']").val();
+                    
                 }
             },            
             "order": [[ 0, "desc" ]],    
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'user_type', name: '{{TBL_ADMIN_USER_TYPE}}.title'},
-                { data: 'name', name: 'name' },                                              
-                { data: 'email', name: 'email' },                                              
-                { data: 'created_at', name: 'created_at' },                                          
+                { data: 'title', name: 'title' },                                              
+                                                              
+                { data: 'created_at', name: 'created_at' },                                              
                 { data: 'action', orderable: false, searchable: false}             
             ]
         });        

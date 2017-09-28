@@ -70,11 +70,33 @@ class Admin extends Authenticatable
     public static $ADD_CITY = 32;
     public static $EDIT_CITY = 33;
     public static $DELETE_CITY = 34;
-    
-    public static $LIST_ADMIN_USERS = 35;
-    public static $ADD_ADMIN_USERS = 36;
-    public static $EDIT_ADMIN_USERS = 37;
-    public static $DELETE_ADMIN_USERS = 38;
+
+    public static $LIST_BLOG_CATEGORY = 35;
+    public static $ADD_BLOG_CATEGORY = 36;
+    public static $EDIT_BLOG_CATEGORY = 37;
+    public static $DELETE_BLOG_CATEGORY = 38;
+
+    public static $LIST_BLOG_TAG = 39;
+    public static $ADD_BLOG_TAG = 40;
+    public static $EDIT_BLOG_TAG = 41;
+    public static $DELETE_BLOG_TAG = 42;
+
+    public static $LIST_BLOG_POSTS = 43;
+    public static $ADD_BLOG_POSTS = 44;
+    public static $EDIT_BLOG_POSTS = 45;
+    public static $DELETE_BLOG_POSTS = 46;
+
+    public static $LIST_ADMIN_USERS = 47;
+    public static $ADD_ADMIN_USERS = 48;
+    public static $EDIT_ADMIN_USERS = 49;
+    public static $DELETE_ADMIN_USERS = 50;    
+    public static $CHANGE_PASSWORD_ADMIN_USERS = 51;
+
+    public static $LIST_CMS_PAGES = 52;
+    public static $ADD_CMS_PAGES = 53;
+    public static $EDIT_CMS_PAGES = 54;
+    public static $DELETE_CMS_PAGES = 55;  
+
 
     /**
      * check page acces permissions

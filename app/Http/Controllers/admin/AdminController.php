@@ -145,6 +145,7 @@ class AdminController extends Controller
         
         return ['status' => $status, 'msg' => $msg];
     }
+    
     public function rights(Request $request)
     {
         $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$ASSIGN_RIGHTS);
