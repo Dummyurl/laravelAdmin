@@ -28,10 +28,10 @@
                             <tr>
                                <th width="5%">ID</th>
                                <th width="15%">User Type</th>                                   
-                               <th width="28%">FullName</th>                           
+                               <th width="20%">FullName</th>                           
                                <th width="28%">Email</th>                           
                                <th width="20%">Created At</th>                           
-                               <th width="5%" data-orderable="false">Action</th>
+                               <th width="10%" data-orderable="false">Action</th>
                             </tr>
                         </thead>                                         
                         <tbody>

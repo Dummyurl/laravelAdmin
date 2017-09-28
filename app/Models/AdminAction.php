@@ -76,5 +76,13 @@ class AdminAction extends Model
 
     public $ADD_BLOG_TAG = 33;   
     public $EDIT_BLOG_TAG = 34;   
-    public $DELETE_BLOG_TAG = 35;   
+    public $DELETE_BLOG_TAG = 35;
+
+    public $ADD_BLOG_POSTS = 36;   
+    public $EDIT_BLOG_POSTS = 37;   
+    public $DELETE_BLOG_POSTS = 38; 
+    
+    public $CHANGE_PASSWORD_ADMIN_USERS = 39; 
+
+
 }

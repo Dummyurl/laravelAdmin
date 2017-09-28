@@ -33,8 +33,8 @@
                     <label class="control-label">Status</label>
                     <select name="search_status" class="form-control">
                         <option value="all">All</option>                        
-                        <option value="1" {!! \Request::get("search_status") == 1 ? 'selected="selected"':'' !!}>Active</option>                        
-                        <option value="0" {!! \Request::get("search_status") == "0" ? 'selected="selected"':'' !!}>Inactive</option>                        
+                        <option value="1" {!! \Request::get("search_status") == 1 ? 'selected="selected"':'' !!}>Yes</option>                        
+                        <option value="0" {!! \Request::get("search_status") == "0" ? 'selected="selected"':'' !!}>No</option>                        
                     </select>                                                                 
                 </div>                    
                 <div class="col-md-8"><center>

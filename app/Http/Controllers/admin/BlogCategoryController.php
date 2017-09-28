@@ -342,7 +342,7 @@ class BlogCategoryController extends Controller
                     else
                         return '-';    
                 })
-                             
+                ->rawColumns(['status','action'])             
                 ->filter(function ($query) 
                 {
                     $search_start_date = trim(request()->get("search_start_date"));                    

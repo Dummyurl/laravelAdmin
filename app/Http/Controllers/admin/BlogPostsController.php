@@ -193,7 +193,7 @@ class BlogPostsController extends Controller
      */
     public function edit($id, Request $request)
     {   
-        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$EDIT_BLOG_TAG);
+        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$EDIT_BLOG_POSTS);
         
         if($checkrights) 
         {
@@ -231,7 +231,7 @@ class BlogPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$EDIT_BLOG_TAG);
+        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$EDIT_BLOG_POSTS);
         
         if($checkrights) 
         {
@@ -275,7 +275,7 @@ class BlogPostsController extends Controller
             $params=array();    
                                     
             $params['adminuserid']  = \Auth::guard('admins')->id();
-            $params['actionid']     = $this->adminAction->EDIT_BLOG_TAG ;
+            $params['actionid']     = $this->adminAction->EDIT_BLOG_POSTS ;
             $params['actionvalue']  = $id;
             $params['remark']       = "Add Country::".$id;
                                     
@@ -295,7 +295,7 @@ class BlogPostsController extends Controller
      */
     public function destroy($id, Request $request)
     {   
-        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$DELETE_BLOG_TAG);
+        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$DELETE_BLOG_POSTS);
         
         if($checkrights) 
         {
@@ -316,7 +316,7 @@ class BlogPostsController extends Controller
                 $params=array();    
                                     
                 $params['adminuserid']  = \Auth::guard('admins')->id();
-                $params['actionid']     = $this->adminAction->DELETE_BLOG_TAG;
+                $params['actionid']     = $this->adminAction->DELETE_BLOG_POSTS;
                 $params['actionvalue']  = $id;
                 $params['remark']       = "Add Country::".$id;
                                         
@@ -364,6 +364,7 @@ class BlogPostsController extends Controller
                     else
                         return '-';    
                 })
+
                 ->addColumn('action', function(BlogPost $row) {
                     return view("admin.partials.action",
                         [
@@ -374,7 +375,8 @@ class BlogPostsController extends Controller
                         ]
                     )
                     ->render();
-                })                
+                }) 
+                ->rawColumns(['status','action'])                
                 ->filter(function ($query) 
                 {
                     $search_start_date = trim(request()->get("search_start_date"));                    

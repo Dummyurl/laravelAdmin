@@ -28,8 +28,8 @@
                                 <tr>
                                    <th width="15%">ID</th>
                                    <th width="20%">Category</th>                                   
-                                   <th width="30%">Title</th>                                   
-                                   <th width="15%">Created AT</th>
+                                   <th width="25%">Title</th>                                   
+                                   <th width="20%">Created AT</th>
                                    <th width="10%" data-orderable="false">Action</th>
                                 </tr>
                             </thead>                                         

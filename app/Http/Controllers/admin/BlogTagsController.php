@@ -50,7 +50,7 @@ class BlogTagsController extends Controller
         }
         
         $data = array();        
-        $data['page_title'] = "Manage Blog Categories";        
+        $data['page_title'] = "Manage Blog Tag";        
         $data['statusArr'] = [1=>"Yes",0=>"No"];
 
         $data['add_url'] = route($this->moduleRouteText.'.create');
@@ -317,6 +317,12 @@ class BlogTagsController extends Controller
 
             return Datatables::eloquent($model)
                 
+                ->editColumn('status', function ($row) {
+                    if ($row->status == 1)
+                        return "<a class='btn btn-xs btn-success'>Yes</a>";
+                    else
+                        return '<a class="btn btn-xs btn-danger">No</a>';
+                })
                 
 
                 ->addColumn('action', function(BlogTag $row) {
@@ -337,7 +343,7 @@ class BlogTagsController extends Controller
                     else
                         return '-';    
                 })
-                             
+                ->rawColumns(['status','action'])             
                 ->filter(function ($query) 
                 {
                     $search_start_date = trim(request()->get("search_start_date"));                    
