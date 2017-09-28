@@ -36,6 +36,73 @@ class AdminUserController extends Controller
         view()->share("moduleRouteText", $this->moduleRouteText);
         view()->share("moduleViewName", $this->moduleViewName);
 	}
+    public function changePassword(Request $request, $id){
+
+        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$CHANGE_PASSWORD_ADMIN_USERS);
+        
+        if($checkrights) 
+        {
+            return $checkrights;
+        }
+
+        $data = array();
+        $model = $this->modelObj;
+        $formObj = $model::find($id);
+
+        $data['formObj'] = $formObj;
+        return view('admin.admin_users.changepassword', $data);
+    }
+    
+    public function postChangePassword(Request $request, $id){
+        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$CHANGE_PASSWORD_ADMIN_USERS);
+        
+        if($checkrights) 
+        {
+            return $checkrights;
+        }
+
+        $status = 1;
+        $msg = "Your password has been changed successfully.";
+
+        $validator = Validator::make($request->all(), [
+            'new_password' => 'required|min:4|confirmed',
+            'new_password_confirmation' => 'required',
+        ]);        
+        
+        if ($validator->fails()) 
+        {
+            $messages = $validator->messages();
+            
+            $status = 0;
+            $msg = "";
+            
+            foreach ($messages->all() as $message) 
+            {
+                $msg .= $message . "<br />";
+            }            
+        }
+        else
+        {
+           
+            $adminuser = \App\Models\Admin::find($id);
+            $adminuser->password = bcrypt($request->get('new_password'));
+            $adminuser->save(); 
+            //store logs detail
+            $params=array();    
+                                    
+            $params['adminuserid']  = \Auth::guard('admins')->id();
+            $params['actionid']     = $this->adminAction->CHANGE_PASSWORD_ADMIN_USERS ;
+            $params['actionvalue']  = $id;
+            $params['remark']       = "Add Admin User::".$id;
+                                    
+            $logs= \App\Models\AdminLog::writeadminlog($params);
+            
+            session()->flash('success_message', $msg);           
+
+        }
+
+        return ['status' => $status, 'msg' => $msg];
+    }
     
     /**
      * Display a listing of the resource.
@@ -308,6 +375,8 @@ class AdminUserController extends Controller
             return redirect($this->list_url);
         }
     }
+
+    
     public function data(Request $request)
     {
         $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$LIST_ADMIN_USERS);
@@ -323,12 +392,14 @@ class AdminUserController extends Controller
         return Datatables::eloquent($model)        
                
             ->addColumn('action', function(AdminUser $row) {
-                return view("admin.partials.action",
+                return view("admin.partials.password",
                     [
                         'currentRoute' => $this->moduleRouteText,
                         'row' => $row,                                 
                         'isEdit' =>\App\Models\Admin::isAccess(\App\Models\Admin::$EDIT_ADMIN_USERS),
-                        'isDelete' => \App\Models\Admin::isAccess(\App\Models\Admin::$DELETE_ADMIN_USERS),                                                         
+                        'isDelete' => \App\Models\Admin::isAccess(\App\Models\Admin::$DELETE_ADMIN_USERS),  
+                        'btnChangePass' => \App\Models\Admin::isAccess(\App\Models\Admin::$DELETE_ADMIN_USERS),  
+                                                                          
                     ]
                 )->render();
             })

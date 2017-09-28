@@ -74,10 +74,21 @@ Route::group(['prefix' => $ADMIN_PREFIX], function(){
 	Route::any('cities/getstates', 'admin\CitiesController@getstates')->name('getstates');
 
 	Route::any('admin-users/data', 'admin\AdminUserController@data')->name('admin-users.data');
-	Route::resource('admin-users', 'admin\AdminUserController'); 
-
+	Route::resource('admin-users', 'admin\AdminUserController');
+	Route::get('admin-users/changepassword/{id}', 'admin\AdminUserController@changePassword');
+	Route::put('admin-users/changepassword/{id}', 'admin\AdminUserController@postChangePassword');
+	
 	Route::any('users/data', 'admin\UsersController@data')->name('users.data');
  	Route::resource('users', 'admin\UsersController');
+
+ 	Route::any('blog-categories/data', 'admin\BlogCategoryController@data')->name('blog-categories.data');
+ 	Route::resource('blog-categories', 'admin\BlogCategoryController');
+
+ 	Route::any('blog-tags/data', 'admin\BlogTagsController@data')->name('blog-tags.data');
+ 	Route::resource('blog-tags', 'admin\BlogTagsController');
+
+ 	Route::any('blog-posts/data', 'admin\BlogPostsController@data')->name('blog-posts.data');
+ 	Route::resource('blog-posts', 'admin\BlogPostsController');
         
     });    
 });

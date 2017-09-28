@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -67,5 +68,21 @@ class AdminAction extends Model
     
     public $ADD_ADMIN_USERS = 27;
     public $EDIT_ADMIN_USERS = 28;
-    public $DELETE_ADMIN_USERS = 29;   
+    public $DELETE_ADMIN_USERS = 29;
+
+    public $ADD_BLOG_CATEGORY = 30;   
+    public $EDIT_BLOG_CATEGORY = 31;   
+    public $DELETE_BLOG_CATEGORY = 32; 
+
+    public $ADD_BLOG_TAG = 33;   
+    public $EDIT_BLOG_TAG = 34;   
+    public $DELETE_BLOG_TAG = 35;
+
+    public $ADD_BLOG_POSTS = 36;   
+    public $EDIT_BLOG_POSTS = 37;   
+    public $DELETE_BLOG_POSTS = 38; 
+    
+    public $CHANGE_PASSWORD_ADMIN_USERS = 39; 
+
+
 }

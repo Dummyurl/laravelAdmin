@@ -1,5 +1,6 @@
 @extends('admin.layouts.app')
 
+
 @section('content')
 
 <!-- BEGIN PAGE CONTENT BODY -->
@@ -8,38 +9,37 @@
 
         <div class="col-md-12">
             
-            @include($moduleViewName.".search")           
+            @include($moduleViewName.".search")
 
             <div class="clearfix"></div>    
             <div class="portlet box green">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-list"></i>{{ $page_title }}    
+                        <i class="fa fa-list"></i>{{ $page_title }} 
                     </div>
-                  
                     @if($btnAdd)
                         <a class="btn btn-default pull-right btn-sm mTop5" href="{{ $add_url }}">Add New</a>
-                    @endif                     
-
+                    @endif
                 </div>
                 <div class="portlet-body">                    
-                    <table class="table table-bordered table-striped table-condensed flip-content" id="server-side-datatables">
-                        <thead>
-                            <tr>
-                               <th width="5%">ID</th>
-                               <th width="15%">User Type</th>                                   
-                               <th width="20%">FullName</th>                           
-                               <th width="28%">Email</th>                           
-                               <th width="20%">Created At</th>                           
-                               <th width="10%" data-orderable="false">Action</th>
-                            </tr>
-                        </thead>                                         
-                        <tbody>
-                        </tbody>
-                    </table>                                              
+                        <table class="table table-bordered table-striped table-condensed flip-content" id="server-side-datatables">
+                            <thead>
+                                <tr>
+                                   <th width="15%">ID</th>
+                                   <th width="40%">Title</th>
+                                   <th width="15%">Status</th>
+                                   <th width="20%">Created AT</th>
+                                   <th width="10%" data-orderable="false">Action</th>
+                                </tr>
+                            </thead>                                         
+                            <tbody>
+                            </tbody>
+                        </table>                                              
                 </div>
             </div>              
         </div>
+
+
     </div>
 </div>
 </div>            
@@ -71,25 +71,27 @@
             ajax: {
                 "url": "{!! route($moduleRouteText.'.data') !!}",
                 "data": function ( data ) 
-                {
+                 {
                     data.search_start_date = $("#search-frm input[name='search_start_date']").val();
                     data.search_end_date = $("#search-frm input[name='search_end_date']").val();
                     data.search_id = $("#search-frm input[name='search_id']").val();
-                    data.user_type_id = $("#search-frm select[name='user_type_id']").val();
-                    data.search_fnm = $("#search-frm input[name='search_fnm']").val();
-                    data.search_email = $("#search-frm input[name='search_email']").val();
-                }
+                    data.search_text = $("#search-frm input[name='search_text']").val();
+                    data.search_status = $("#search-frm select[name='search_status']").val();
+                 }
             },            
             "order": [[ 0, "desc" ]],    
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'user_type', name: '{{TBL_ADMIN_USER_TYPE}}.title'},
-                { data: 'name', name: 'name' },                                              
-                { data: 'email', name: 'email' },                                              
-                { data: 'created_at', name: 'created_at' },                                          
+                { data: 'title', name: 'title' },
+                { data: 'status', name: 'status' },
+                { data: 'created_at', name: 'created_at', searchable: false},
                 { data: 'action', orderable: false, searchable: false}             
             ]
         });        
+
     });
+
     </script>
+
 @endsection
+
