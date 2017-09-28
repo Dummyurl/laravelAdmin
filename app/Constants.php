@@ -13,3 +13,6 @@ define("TBL_USERS_ACTION","user_actions");
 define("TBL_COUNTRY","countries");
 define("TBL_STATE","states");
 define("TBL_CITY","cities");
+define("TBL_BLOG_CATEGORIES","blog_categories");
+define("TBL_BLOG_TAG","blog_tags");
+define("TBL_BLOG_POST","blog_posts");
