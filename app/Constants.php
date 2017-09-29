@@ -16,4 +16,5 @@ define("TBL_CITY","cities");
 define("TBL_BLOG_CATEGORIES","blog_categories");
 define("TBL_BLOG_TAG","blog_tags");
 define("TBL_BLOG_POST","blog_posts");
-define("TBL_CMS_PAGES","cms_pages");
+//define("TBL_BLOG_POST","blog_posts");
+define("TBL_USER_LOGS","cms_pages_new");
