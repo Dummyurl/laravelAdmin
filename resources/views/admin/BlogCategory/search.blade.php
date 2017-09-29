@@ -33,12 +33,11 @@
                     <label class="control-label">Status</label>
                     <select name="search_status" class="form-control">
                         <option value="all">All</option>                        
-                        <option value="1" {!! \Request::get("search_status") == 1 ? 'selected="selected"':'' !!}>Yes</option>                        
-                        <option value="0" {!! \Request::get("search_status") == "0" ? 'selected="selected"':'' !!}>No</option>                        
+                        <option value="1" {!! \Request::get("search_status") == 1 ? 'selected="selected"':'' !!}>Active</option>                        
+                        <option value="0" {!! \Request::get("search_status") == "0" ? 'selected="selected"':'' !!}>Inactive</option>                        
                     </select>                                                                 
                 </div>                  
                 <div class="col-md-6"><center>
-                    <input type="hidden" name="records_per_page" id="record_per_page"/>
                     <input type="submit" class="btn blue mTop25" value="Search"/>
                     &nbsp;
                     <a href="{{ $list_url }}" class="btn red mTop25">Reset</a>

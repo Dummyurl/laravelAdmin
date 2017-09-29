@@ -29,7 +29,7 @@
                                     </div>   
                                     <div class="col-md-6">
                                         <label class="control-label">Status <span class="required">*</span></label>                                        
-                                        {!! Form::select('status',[1 => "Yes",0 => "No"],null,['class' => 'form-control', 'data-required' => true]) !!}
+                                        {!! Form::select('status',[1 => "Active",0 => "Inactive"],null,['class' => 'form-control', 'data-required' => true]) !!}
                                     </div>   
                                 </div>                       
                                 <div class="clearfix">&nbsp;</div>

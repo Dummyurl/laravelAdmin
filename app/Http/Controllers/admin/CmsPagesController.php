@@ -137,7 +137,7 @@ class CmsPagesController extends Controller
             $params['adminuserid']  = \Auth::guard('admins')->id();
             $params['actionid']     = $this->adminAction->ADD_CMS_PAGES ;
             $params['actionvalue']  = $id;
-            $params['remark']       = "Add CMS ::".$id;
+            $params['remark']       = "Add CMS Page::".$id;
                                     
             $logs=\App\Models\AdminLog::writeadminlog($params);
 
@@ -247,7 +247,7 @@ class CmsPagesController extends Controller
                 $params['adminuserid']  = \Auth::guard('admins')->id();
                 $params['actionid']     = $this->adminAction->EDIT_CMS_PAGES;
                 $params['actionvalue']  = $id;
-                $params['remark']       = "Edit CMS::".$id;
+                $params['remark']       = "Edit CMS Page::".$id;
 
                 $logs=\App\Models\AdminLog::writeadminlog($params);           
         }
@@ -286,7 +286,7 @@ class CmsPagesController extends Controller
                 $params['adminuserid']  = \Auth::guard('admins')->id();
                 $params['actionid']     = $this->adminAction->DELETE_CMS_PAGES;
                 $params['actionvalue']  = $id;
-                $params['remark']       = "Delete CMS::".$id;
+                $params['remark']       = "Delete CMS Page::".$id;
 
                 $logs=\App\Models\AdminLog::writeadminlog($params);     
 
@@ -319,11 +319,7 @@ class CmsPagesController extends Controller
                          
         return Datatables::eloquent($model)
                        
-            ->editColumn('description', function($row){
-                $html = "<a href='javascript:void(0)' class ='description-link' id='".$row->id."'>".substr($row->description,0,60)."...</a>";
-                $html .= "<div class='hidden' id='hidden_".$row->id."'>".$row->description."</div>";
-                return $html;  
-            })
+            
             ->addColumn('action', function(CmsPage $row) {
                 return view("admin.partials.action",
                     [

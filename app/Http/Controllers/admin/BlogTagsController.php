@@ -133,7 +133,7 @@ class BlogTagsController extends Controller
             $params['adminuserid']  = \Auth::guard('admins')->id();
             $params['actionid']     = $this->adminAction->ADD_BLOG_TAG;
             $params['actionvalue']  = $id;
-            $params['remark']       = "Add Country::".$id;
+            $params['remark']       = "Add Blog Tag::".$id;
                                     
             $logs=\App\Models\AdminLog::writeadminlog($params);
 
@@ -244,7 +244,7 @@ class BlogTagsController extends Controller
             $params['adminuserid']  = \Auth::guard('admins')->id();
             $params['actionid']     = $this->adminAction->EDIT_BLOG_TAG ;
             $params['actionvalue']  = $id;
-            $params['remark']       = "Add Country::".$id;
+            $params['remark']       = "Edit Blog Tag::".$id;
                                     
             $logs=\App\Models\AdminLog::writeadminlog($params);
 
@@ -285,7 +285,7 @@ class BlogTagsController extends Controller
                 $params['adminuserid']  = \Auth::guard('admins')->id();
                 $params['actionid']     = $this->adminAction->DELETE_BLOG_TAG;
                 $params['actionvalue']  = $id;
-                $params['remark']       = "Add Country::".$id;
+                $params['remark']       = "Delete Blog Tag::".$id;
                                         
                 $logs=\App\Models\AdminLog::writeadminlog($params);          
 
@@ -319,9 +319,9 @@ class BlogTagsController extends Controller
                 
                 ->editColumn('status', function ($row) {
                     if ($row->status == 1)
-                        return "<a class='btn btn-xs btn-success'>Yes</a>";
+                        return "<a class='btn btn-xs btn-success'>Active</a>";
                     else
-                        return '<a class="btn btn-xs btn-danger">No</a>';
+                        return '<a class="btn btn-xs btn-danger">Inactive</a>';
                 })
                 
 

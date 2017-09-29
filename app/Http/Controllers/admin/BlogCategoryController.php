@@ -22,7 +22,6 @@ class BlogCategoryController extends Controller
         $this->module = $module;
         
         $this->adminAction = new AdminAction;
-       // $this->modelObj = new BlogCategory();
         $this->modelObj = new BlogCategory(); 
 
         $this->addMsg = $module . " has been added successfully!";
@@ -104,7 +103,7 @@ class BlogCategoryController extends Controller
         $data = array();
         
         $validator = Validator::make($request->all(), [
-            'title' => 'required|min:2',
+            'title' => 'required|min:2|unique:'.TBL_BLOG_CATEGORIES.',title',
         ]);
         
         // check validations
@@ -133,7 +132,7 @@ class BlogCategoryController extends Controller
             $params['adminuserid']  = \Auth::guard('admins')->id();
             $params['actionid']     = $this->adminAction->ADD_BLOG_CATEGORY ;
             $params['actionvalue']  = $id;
-            $params['remark']       = "Add Country::".$id;
+            $params['remark']       = "Add Blog Category::".$id;
                                     
             $logs=\App\Models\AdminLog::writeadminlog($params);
 
@@ -212,7 +211,7 @@ class BlogCategoryController extends Controller
         $data = array();        
         
         $validator = Validator::make($request->all(), [
-            'title' => 'required|min:2',
+            'title' => 'required|min:2|unique:'.TBL_BLOG_CATEGORIES.',title,'.$id,
         ]);
         
         // check validations
@@ -242,9 +241,9 @@ class BlogCategoryController extends Controller
             $params=array();    
                                     
             $params['adminuserid']  = \Auth::guard('admins')->id();
-            $params['actionid']     = $this->adminAction->EDIT_BLOG_CATEGORY ;
+            $params['actionid']     = $this->adminAction->EDIT_BLOG_CATEGORY;
             $params['actionvalue']  = $id;
-            $params['remark']       = "Add Country::".$id;
+            $params['remark']       = "Edit Blog Category::".$id;
                                     
             $logs=\App\Models\AdminLog::writeadminlog($params);
 
@@ -285,7 +284,7 @@ class BlogCategoryController extends Controller
                 $params['adminuserid']  = \Auth::guard('admins')->id();
                 $params['actionid']     = $this->adminAction->DELETE_BLOG_CATEGORY ;
                 $params['actionvalue']  = $id;
-                $params['remark']       = "Add Country::".$id;
+                $params['remark']       = "Delete Blog Category::".$id;
                                         
                 $logs=\App\Models\AdminLog::writeadminlog($params);          
 
@@ -319,9 +318,9 @@ class BlogCategoryController extends Controller
                 
                 ->editColumn('status', function ($row) {
                     if ($row->status == 1)
-                        return "<a class='btn btn-xs btn-success'>Yes</a>";
+                        return "<a class='btn btn-xs btn-success'>Active</a>";
                     else
-                        return '<a class="btn btn-xs btn-danger">No</a>';
+                        return '<a class="btn btn-xs btn-danger">Inactive</a>';
                     })
 
                 ->addColumn('action', function(BlogCategory $row) {
