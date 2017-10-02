@@ -74,7 +74,7 @@ class CmsPagesController extends Controller
 
         $data = array();
         $data['formObj'] = $this->modelObj;
-        $data['page_title'] = "Add".$this->module;
+        $data['page_title'] = "Add ".$this->module;
         $data['action_url'] = $this->moduleRouteText.".store";
         $data['action_params'] = 0;
         $data['buttonText'] = "Save";

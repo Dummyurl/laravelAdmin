@@ -1,7 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('breadcrumb')
-
 @stop
 
 @section('content')
@@ -13,7 +12,7 @@
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-user"></i>
+                            <i class="fa fa-file"></i>
                             {{ $page_title }}
                         </div>
                         <a class="btn btn-default pull-right btn-sm mTop5" href="{{ $list_url }}">Back</a>
@@ -34,27 +33,32 @@
                             </div>
                             <div class="clearfix">&nbsp;</div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <label class="control-label">Meta Title<span class="required">*</span></label>
                                     {!! Form::text('meta_title',null,['class' => 'form-control', 'data-required' => true]) !!}
                                 </div> 
-                                <div class="col-md-6">
+                            </div>
+                            <div class="clearfix">&nbsp;</div>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <label class="control-label">Meta Description<span class="required">*</span></label>
-                                    {!! Form::textarea('meta_description',null,['class' => 'form-control','data-required' => true]) !!}
+                                    {!! Form::textarea('meta_description',null,['class' => 'form-control','data-required' => true, 'rows'=>'3']) !!}
                                 </div>                                
                             </div> 
                             <div class="clearfix">&nbsp;</div>
-                            <div class="row">
-                                
-                                <div class="col-md-6">
+                            <div class="row">                                
+                                <div class="col-md-12">
                                     <label class="control-label">Short Description<span class="required">*</span></label>
-                                    {!! Form::textarea('short_description',null,['class' => 'form-control','data-required' => true]) !!}
+                                    {!! Form::textarea('short_description',null,['class' => 'form-control ckeditor','data-required' => true,'rows'=>'5']) !!}
                                 </div> 
-                                <div class="col-md-6">  
+                            </div>
+                            <div class="clearfix">&nbsp;</div>
+                            <div class="row">                            
+                                <div class="col-md-12">  
                                     <label class="control-label">Description<span class="required">*</span></label>
-                                    {!! Form::textarea('description',null,['class' => 'form-control','data-required' => true]) !!}
+                                    {!! Form::textarea('description',null,['class' => 'form-control ckeditor','data-required' => true,'rows'=>'8']) !!}
                                 </div>                                 
-                            </div>                                  
+                            </div>
                             <div class="clearfix">&nbsp;</div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -69,9 +73,12 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 @section('scripts')
+    <script src="{{asset('themes/admin/assets/global/plugins/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#main-frm').submit(function () {
