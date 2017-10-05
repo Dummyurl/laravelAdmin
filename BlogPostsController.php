@@ -3,30 +3,31 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Validator;
-use App\Models\BlogTag;
-use App\Models\BlogPost;
-use App\Models\BlogPostTag;
-use App\Models\BlogCategory;
+use App\Http\Controllers\Controller;
+use App\BlogTag;
+use App\BlogPost;
+use App\BlogPostTags;
+use App\BlogPostComments;
+use App\User;
 use Datatables;
-use App\Models\AdminLog;
-use App\Models\AdminAction;
+use App\AdminLog;
+use App\AdminAction;
 
 class BlogPostsController extends Controller
 {
     public function __construct() {
 
-        $this->moduleRouteText = "blog-posts";
-        $this->moduleViewName = "admin.BlogPost";
+        $this->moduleRouteText = "blog.posts";
+        $this->moduleViewName = "admin.blog_post";
         $this->list_url = route($this->moduleRouteText.".index");
 
-        $module = "Blog Pot";
-        $this->module = $module;
-        
-        $this->adminAction = new AdminAction;
-      
-        $this->modelObj = new BlogPost(); 
+        $module = "Blog Post";
+        $this->module = $module;        
+
+        $this->adminAction= new \App\AdminAction;
+
+        $this->modelObj = new BlogPost;
 
         $this->addMsg = $module . " has been added successfully!";
         $this->updateMsg = $module . " has been updated successfully!";
@@ -45,22 +46,22 @@ class BlogPostsController extends Controller
      */
     public function index(Request $request)
     {
-        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$LIST_BLOG_POSTS);
+        $adminUserAction = \App\Admin::$LIST_BLOG_POST;        
+        $checkrights     = \App\Http\Controllers\admin\AdminController::setAdminRights($adminUserAction);
         
         if($checkrights) 
         {
             return $checkrights;
         }
-        
+       
         $data = array();
 
-        $data['category'] = \App\Models\BlogCategory::pluck("title","id")->all(); 
+        $data['category'] = \App\BlogCategory::pluck("title","id")->all();        
+        
         $data['page_title'] = "Manage Blog Posts";
 
-        $data['add_url'] = route($this->moduleRouteText.'.create');
-        $data['btnAdd'] = \App\Models\Admin::isAccess(\App\Models\Admin::$ADD_BLOG_POSTS);
      
-        return view($this->moduleViewName.".index", $data);     
+        return view($this->moduleViewName.".index", $data);        
     }
 
     /**
@@ -69,18 +70,19 @@ class BlogPostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
-        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$ADD_BLOG_POSTS);
+    {        
+        $adminUserAction = \App\Admin::$ADD_BLOG_POST;        
+        $checkrights     = \App\Http\Controllers\admin\AdminController::setAdminRights($adminUserAction);
         
         if($checkrights) 
         {
             return $checkrights;
-        }     
+        }
         
         $model = $this->modelObj;
         $data = array();
         $data['formObj'] = $this->modelObj;
-        $data['categories'] = ['' => 'select category'] + \App\Models\BlogCategory::pluck("title","id")->toArray();
+        $data['categories'] = ['' => 'select category'] + \App\BlogCategory::pluck("title","id")->toArray();
         
         $data['page_title'] = "Add ".$this->module;
         $data['action_url'] = $this->moduleRouteText.".store";
@@ -93,8 +95,9 @@ class BlogPostsController extends Controller
         $data['list_tags'] = [];
 
         return view($this->moduleViewName.'.add', $data);
-
     }
+    
+ 
 
     /**
      * Store a newly created resource in storage.
@@ -103,25 +106,26 @@ class BlogPostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$ADD_BLOG_POSTS);
+    {        
+        $adminUserAction = \App\Admin::$ADD_BLOG_POST;        
+        $checkrights     = \App\Http\Controllers\admin\AdminController::setAdminRights($adminUserAction);
         
         if($checkrights) 
         {
             return $checkrights;
         }
-
+        
+        
         $status = 1;
         $msg = $this->addMsg;
         $data = array();
         
         $validator = Validator::make($request->all(), [
             'title' => 'required|min:2',
-            'category_id'=> 'required|exists:'.TBL_BLOG_CATEGORIES.',id',
-            'tags'=> 'required|exists:'.TBL_BLOG_TAG.',id',
+            'category_id'=> 'required|exists:blog_categories,id',
+            'tags'=> 'required|exists:blog_tags,id',
             'short_description'=>'required|min:10',
-            'content'=>'required|min:10',
-            'status'=>'required',
+            'content'=>'required|min:10'
 
         ]);
         
@@ -151,7 +155,7 @@ class BlogPostsController extends Controller
             {
                 foreach ($tags as $tag)
                 {
-                    $post_insert = new BlogPostTag();
+                    $post_insert = new BlogPostTags();
 
                     $post_insert->post_id=$obj->id;
                     $post_insert->tag_id=$tag;
@@ -161,19 +165,19 @@ class BlogPostsController extends Controller
             }
             
             //store logs detail
-            $params=array();    
+            $params=array();
                                     
             $params['adminuserid']  = \Auth::guard('admins')->id();
             $params['actionid']     = $this->adminAction->ADD_BLOG_POSTS;
             $params['actionvalue']  = $id;
-            $params['remark']       = "Add Blog Post::".$id;
+            $params['remark']       = "Add Blog Posts::".$id;
                                     
-            $logs=\App\Models\AdminLog::writeadminlog($params);
+            $logs=\App\AdminLog::writeadminlog($params);
 
             session()->flash('success_message', $msg);
         }
         
-        return ['status' => $status, 'msg' => $msg, 'data' => $data];
+        return ['status' => $status, 'msg' => $msg, 'data' => $data];        
     }
 
     /**
@@ -194,13 +198,15 @@ class BlogPostsController extends Controller
      * @return \Illuminate\Http\Responseid
      */
     public function edit($id, Request $request)
-    {   
-        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$EDIT_BLOG_POSTS);
+    {        
+        $adminUserAction = \App\Admin::$EDIT_BLOG_POST;        
+        $checkrights     = \App\Http\Controllers\admin\AdminController::setAdminRights($adminUserAction);
         
         if($checkrights) 
         {
             return $checkrights;
-        }  
+        }
+        
         
         $formObj = $this->modelObj->find($id);
 
@@ -213,14 +219,16 @@ class BlogPostsController extends Controller
         $data['formObj'] = $formObj;
         $data['page_title'] = "Edit ".$this->module;
         $data['buttonText'] = "Update";
-        $data['categories'] = ['' => 'select category'] + \App\Models\BlogCategory::pluck("title","id")->toArray();
-        $data['tags'] = \DB::table(TBL_BLOG_TAG)->orderBy("title","ASC")->get();
-     
-        $data['list_tags'] = $formObj->getTags(1);
 
         $data['action_url'] = $this->moduleRouteText.".update";
         $data['action_params'] = $formObj->id;
         $data['method'] = "PUT";
+        $data['categories'] = ['' => 'select category'] + \App\BlogCategory::pluck("title","id")->toArray();
+
+        $data['tags'] = \DB::table("blog_tags")->orderBy("title","ASC")->get();
+
+
+        $data['list_tags'] = $formObj->getTags(1);
 
         return view($this->moduleViewName.'.add', $data);
     }
@@ -234,14 +242,17 @@ class BlogPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$EDIT_BLOG_POSTS);
+        
+        $adminUserAction = \App\Admin::$EDIT_BLOG_POST;        
+        $checkrights     = \App\Http\Controllers\admin\AdminController::setAdminRights($adminUserAction);
         
         if($checkrights) 
         {
             return $checkrights;
-        }  
-              
-        $record = $this->modelObj->find($id);
+        }
+        
+        
+        $model = $this->modelObj->find($id);
 
         $status = 1;
         $msg = $this->updateMsg;
@@ -249,15 +260,14 @@ class BlogPostsController extends Controller
         
         $validator = Validator::make($request->all(), [
             'title' => 'required|min:2',
-            'category_id'=> 'required|exists:'.TBL_BLOG_CATEGORIES.',id',
-            'tags'=> 'exists:'.TBL_BLOG_TAG.',id',
+            'category_id'=> 'required|exists:blog_categories,id',
+            'tags'=> 'exists:blog_tags,id',
             'short_description'=>'required|min:10',
-            'content'=>'required|min:10',
-            'status'=>'required',
+            'content'=>'required|min:10'
         ]);
         
         // check validations
-        if(!$record)
+        if(!$model)
         {
             $status = 0;
             $msg = "Record not found !";
@@ -280,7 +290,9 @@ class BlogPostsController extends Controller
             $short_description = $request->get('short_description');
             $content = $request->get('content');
             $category_id = $request->get('category_id');
-            $tags = $request->get('tags');             
+            $tags = $request->get('tags');
+
+            $record = BlogPost::find($id);
 
             $record->title = $title; 
             $record->short_description = $short_description; 
@@ -289,10 +301,12 @@ class BlogPostsController extends Controller
             $record->save();
 
             // Tags
-            $table = TBL_BLOG_POST_TAG;
+            $table = "blog_post_tags";
 
             // delete old records
-            \DB::table($table)->where('post_id',$id)->delete();             
+            \DB::table($table)->where('post_id',$record->id)->delete();
+
+            //BlogPostTags::where("post_id",$record->id)->delete();
 
             if($request->has('tags'))
             {
@@ -300,28 +314,31 @@ class BlogPostsController extends Controller
                 {
                     foreach($tags as $tag)
                     {                 
-                        $blogtags = new BlogPostTag();
+                        $blogtags = new BlogPostTags();
                         $blogtags->post_id=$record->id;
                         $blogtags->tag_id=$tag;
                         $blogtags->save();
                     }
                 }  
             }
+
+            
+            //$model->update($input);
+
             //store logs detail
-            $params=array();    
+            $params=array();
                                     
             $params['adminuserid']  = \Auth::guard('admins')->id();
-            $params['actionid']     = $this->adminAction->EDIT_BLOG_POSTS ;
+            $params['actionid']     = $this->adminAction->EDIT_BLOG_POSTS;
             $params['actionvalue']  = $id;
-            $params['remark']       = "Edit Blog Post::".$id;
+            $params['remark']       = "Edit Blog Posts::".$id;
                                     
-            $logs=\App\Models\AdminLog::writeadminlog($params);
+            $logs=\App\AdminLog::writeadminlog($params);
 
             session()->flash('success_message', $msg);
         }
         
-        return ['status' => $status, 'msg' => $msg, 'data' => $data];  
-
+        return ['status' => $status, 'msg' => $msg, 'data' => $data];        
 
     }
 
@@ -332,36 +349,38 @@ class BlogPostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, Request $request)
-    {   
-        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$DELETE_BLOG_POSTS);
+    {
+        $adminUserAction = \App\Admin::$DELETE_BLOG_POST;        
+        $checkrights     = \App\Http\Controllers\admin\AdminController::setAdminRights($adminUserAction);
         
         if($checkrights) 
         {
             return $checkrights;
         }
-
+        
+        
         $modelObj = $this->modelObj->find($id);
 
         if($modelObj) 
         {
             try 
-            {             
-                $table = TBL_BLOG_POST_TAG;
-                \DB::table($table)->where('post_id',$id)->delete();
+            {    
+               // BlogPostTags::where("post_id",$id)->delete();
+                \DB::table('blog_post_tags')->where('post_id',$id)->delete();
 
                 $backUrl = $request->server('HTTP_REFERER');
                 $modelObj->delete();
-                session()->flash('success_message', $this->deleteMsg);  
+                session()->flash('success_message', $this->deleteMsg);
 
                 //store logs detail
-                $params=array();    
-                                    
+                $params=array();
+                
                 $params['adminuserid']  = \Auth::guard('admins')->id();
                 $params['actionid']     = $this->adminAction->DELETE_BLOG_POSTS;
                 $params['actionvalue']  = $id;
-                $params['remark']       = "Delete Blog Post::".$id;
-                                        
-                $logs=\App\Models\AdminLog::writeadminlog($params);          
+                $params['remark']       = "Delete Blog Posts::".$id;
+                
+                $logs=\App\AdminLog::writeadminlog($params); 
 
                 return redirect($backUrl);
             } 
@@ -380,91 +399,82 @@ class BlogPostsController extends Controller
 
     public function data(Request $request)
     {
-        $checkrights = \App\Models\Admin::checkPermission(\App\Models\Admin::$LIST_BLOG_POSTS);
+        $adminUserAction = \App\Admin::$LIST_BLOG_POST;        
+        $checkrights     = \App\Http\Controllers\admin\AdminController::setAdminRights($adminUserAction);
         
         if($checkrights) 
         {
             return $checkrights;
         }
-
-            $model = BlogPost::select(TBL_BLOG_POST.".*",TBL_BLOG_CATEGORIES.".title as category_title")
-                ->join(TBL_BLOG_CATEGORIES,TBL_BLOG_CATEGORIES.".id","=",TBL_BLOG_POST.".category_id");
-
+        
+        $model =  BlogPost::select('blog_posts.*', 'blog_categories.title as category_title')
+                    ->join('blog_categories', 'blog_categories.id', '=', 'blog_posts.category_id');
 
         return Datatables::eloquent($model)
-               ->editColumn('status', function ($row) {
-                    if ($row->status == 1)
-                        return "<a class='btn btn-xs btn-success'>Active</a>";
-                    else
-                        return '<a class="btn btn-xs btn-danger">Inactive</a>';
-                    })
-
-                ->editColumn('created_at', function($row){
-                
-                    if(!empty($row->created_at))         
-                        return date("j M, Y h:i:s A",strtotime($row->created_at));
-                    else
-                        return '-';    
-                })
-
+                ->editColumn('status', 'admin.partials.status')
+                ->editColumn('created_at', '{{ date("j M, Y",strtotime(\App\Custom::convertDateToUserTimezone($created_at))) }}')
                 ->addColumn('action', function(BlogPost $row) {
                     return view("admin.partials.action",
-                        [
-                            'currentRoute' => $this->moduleRouteText,
-                            'row' => $row,                            
-                            'isEdit' => \App\Models\Admin::isAccess(\App\Models\Admin::$EDIT_BLOG_POSTS),
-                            'isDelete' => \App\Models\Admin::isAccess(\App\Models\Admin::$DELETE_BLOG_POSTS),                           
-                        ]
-                    )
-                    ->render();
-                }) 
-                ->rawColumns(['status','action'])                
+                                [
+                                    'currentRoute' => $this->moduleRouteText,
+                                    'row' => $row,
+                                    'postComment'=> \App\Custom::checkAdminRight(\App\Admin::$VIEW_POST_COMMENT),
+                                    'isEdit' => \App\Custom::checkAdminRight(\App\Admin::$EDIT_BLOG_POST),
+                                    'isDelete' => \App\Custom::checkAdminRight(\App\Admin::$DELETE_BLOG_POST)                           
+                                ]
+                            )
+                            ->render();
+                })                
                 ->filter(function ($query) 
                 {
-                    $search_start_date = trim(request()->get("search_start_date"));                    
-                    $search_end_date = trim(request()->get("search_end_date"));
-                    $search_id = request()->get("search_id");
                     $search_category = request()->get("search_category");                    
                     $search_text = request()->get("search_text");                    
-                                                
-                    if (!empty($search_start_date)){
-
-                        $from_date=$search_start_date.' 00:00:00';
-                        $convertFromDate= $from_date;
-
-                        $query = $query->where(TBL_BLOG_POST.".created_at",">=",addslashes($convertFromDate));
-                    }
-
-                    if (!empty($search_end_date)){
-
-                        $to_date=$search_end_date.' 23:59:59';
-                        $convertToDate= $to_date;
-
-                        $query = $query->where(TBL_BLOG_POST.".created_at","<=",addslashes($convertToDate));
-                    }
-
-                    if(!empty($search_id))
-                    {
-                        $idArr = explode(',', $search_id);
-                        $idArr = array_filter($idArr);                
-                        if(count($idArr)>0)
-                        {
-                            $query = $query->whereIn(TBL_BLOG_POST.".id",$idArr);
-                        } 
-                    }
+                    $search_status = request()->get("search_status");  
 
                     if(!empty($search_category))
                     {
-                        $query = $query->where(TBL_BLOG_POST.".category_id",$search_category);
+                        $query = $query->where('blog_posts.category_id', 'LIKE', '%'.$search_category.'%');
                     }
 
                     if(!empty($search_text))
                     {
-                        $query = $query->where(TBL_BLOG_POST.".title", 'LIKE', '%'.$search_text.'%');
-                    }                                                         
+                        $query = $query->where('blog_posts.title', 'LIKE', '%'.$search_text.'%');
+                    }               
+
+                    if($search_status == "1" || $search_status == "0")
+                    {
+                        $query = $query->where('blog_posts.status', $search_status);
+                    }                           
 
                 })
                 ->make(true);        
+    }
 
-    }        
+    public function postComment($id)
+    {
+        $adminUserAction = \App\Admin::$VIEW_POST_COMMENT;        
+        $checkrights     = \App\Http\Controllers\admin\AdminController::setAdminRights($adminUserAction);
+        
+        if($checkrights) 
+        {
+            return $checkrights;
+        }
+               
+        $commentObj = $this->modelObj->find($id);
+
+        if(!$commentObj)
+        {
+            abort(404);
+        }
+
+        $data = array();
+        $data['commentObj'] = $commentObj;
+        $data['page_title'] = "Comments OF ".$commentObj->title;
+
+
+         $comment =  BlogPostComments::where('post_id',$id)->get();
+                    
+                     
+        return view($this->moduleViewName.'.comment', $data,['comments'=>$comment]);
+    }
 }

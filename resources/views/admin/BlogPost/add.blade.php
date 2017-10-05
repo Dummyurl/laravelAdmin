@@ -61,8 +61,9 @@
 
                                                 <div class="note note-info">
                                                         <h4>Tags</h4>
-                                                </div>                                                                        <div class="tools abs">
-                                                            <a href="javascript:;" class="collapse"> </a>
+                                                </div>
+                                                <div class="tools abs">
+                                                    <a href="javascript:;" class="collapse"> </a>
                                                 </div>
 
                                             </div>

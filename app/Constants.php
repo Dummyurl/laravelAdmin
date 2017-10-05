@@ -18,3 +18,4 @@ define("TBL_BLOG_TAG","blog_tags");
 define("TBL_BLOG_POST","blog_posts");
 define("TBL_CMS_PAGES","cms_pages");
 define("TBL_USER_LOGS","userlogs");
+define("TBL_BLOG_POST_TAG","blog_post_tags");

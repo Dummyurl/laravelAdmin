@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2017 at 02:16 PM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 7.0.21
+-- Generation Time: Oct 05, 2017 at 07:05 AM
+-- Server version: 10.1.22-MariaDB
+-- PHP Version: 7.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `laravel_my_laravel`
+-- Database: `pull_admin`
 --
 
 -- --------------------------------------------------------
@@ -908,7 +908,27 @@ INSERT INTO `admin_logs` (`id`, `adminuserid`, `actionid`, `actionvalue`, `remar
 (698, 1, 16, '4', 'Edit Admin Module::4', '::1', '2017-09-28 11:50:35', '2017-09-28 11:50:35'),
 (699, 1, 16, '2', 'Edit Admin Module::2', '::1', '2017-09-28 11:50:46', '2017-09-28 11:50:46'),
 (700, 1, 2, '1', 'Logout Admin User', '::1', '2017-09-28 11:50:51', '2017-09-28 11:50:51'),
-(701, 1, 1, '1', 'Login Admin User', '::1', '2017-09-28 11:50:56', '2017-09-28 11:50:56');
+(701, 1, 1, '1', 'Login Admin User', '::1', '2017-09-28 11:50:56', '2017-09-28 11:50:56'),
+(702, 1, 1, '1', 'Login Admin User', '::1', '2017-09-29 10:08:22', '2017-09-29 10:08:22'),
+(703, 1, 41, '2', 'Edit CMS::2', '::1', '2017-09-29 10:09:28', '2017-09-29 10:09:28'),
+(704, 1, 41, '2', 'Edit CMS::2', '::1', '2017-09-29 10:09:29', '2017-09-29 10:09:29'),
+(705, 1, 1, '1', 'Login Admin User', '::1', '2017-09-29 10:26:44', '2017-09-29 10:26:44'),
+(706, 1, 1, '1', 'Login Admin User', '::1', '2017-09-29 10:40:54', '2017-09-29 10:40:54'),
+(707, 1, 1, '1', 'Login Admin User', '::1', '2017-09-29 10:49:09', '2017-09-29 10:49:09'),
+(708, 1, 36, '8', 'Add Blog Post::8', '::1', '2017-09-29 11:44:06', '2017-09-29 11:44:06'),
+(709, 1, 33, '3', 'Add Blog Tag::3', '::1', '2017-09-29 11:45:27', '2017-09-29 11:45:27'),
+(710, 1, 37, '8', 'Edit Blog Post::8', '::1', '2017-09-29 11:46:04', '2017-09-29 11:46:04'),
+(711, 1, 37, '8', 'Edit Blog Post::8', '::1', '2017-09-29 11:48:53', '2017-09-29 11:48:53'),
+(712, 1, 37, '3', 'Edit Blog Post::3', '::1', '2017-09-29 11:49:28', '2017-09-29 11:49:28'),
+(713, 1, 37, '7', 'Edit Blog Post::7', '::1', '2017-09-29 11:51:10', '2017-09-29 11:51:10'),
+(714, 1, 1, '1', 'Login Admin User', '::1', '2017-09-29 12:14:30', '2017-09-29 12:14:30'),
+(715, 1, 1, '1', 'Login Admin User', '::1', '2017-10-01 09:39:26', '2017-10-01 09:39:26'),
+(716, 1, 37, '8', 'Edit Blog Post::8', '::1', '2017-10-01 09:40:10', '2017-10-01 09:40:10'),
+(717, 1, 37, '8', 'Edit Blog Post::8', '::1', '2017-10-01 09:40:38', '2017-10-01 09:40:38'),
+(718, 1, 37, '8', 'Edit Blog Post::8', '::1', '2017-10-01 09:40:56', '2017-10-01 09:40:56'),
+(719, 1, 1, '1', 'Login Admin User', '::1', '2017-10-01 09:50:35', '2017-10-01 09:50:35'),
+(720, 1, 1, '1', 'Login Admin User', '::1', '2017-10-02 04:39:54', '2017-10-02 04:39:54'),
+(721, 1, 2, '1', 'Logout Admin User', '::1', '2017-10-02 04:56:03', '2017-10-02 04:56:03');
 
 -- --------------------------------------------------------
 
@@ -936,7 +956,7 @@ CREATE TABLE `admin_users` (
 --
 
 INSERT INTO `admin_users` (`id`, `user_type_id`, `name`, `email`, `password`, `status`, `last_login_at`, `remember_token`, `slug`, `created_at`, `updated_at`, `phone`) VALUES
-(1, 1, 'Admin', 'admin@gmail.com', '$2y$10$GArb12qvi/byOeYWo2yRzehHkKHJ8bTh7hWA9Ga/MKu01f6e3lb5G', 1, '2017-09-28 06:20:56', 'lMuTadVYV9uYw7wZy5b8nszqrsaPwamzujjfgvvVHv4d1f4WKhkvRqBQvO5H', NULL, '2016-12-11 10:31:25', '2017-09-28 06:20:56', '1234567890'),
+(1, 1, 'Admin', 'admin@gmail.com', '$2y$10$GArb12qvi/byOeYWo2yRzehHkKHJ8bTh7hWA9Ga/MKu01f6e3lb5G', 1, '2017-10-02 04:56:03', 'kMSynTrVLtAKtJ1w5HmYymLzvbpRm4CQVmrfEBiAl1nzPNJtUkUFakJngPva', NULL, '2016-12-11 10:31:25', '2017-10-01 23:09:54', '1234567890'),
 (2, 1, 'Rinkal', 'rinkal@gmail.com', '$2y$10$ETAmrgTyObz8dhCmsSbJuuHq1sEcJP288esOC0R3IUyIB6oLaVgBy', 1, '2017-09-28 09:08:48', 'YMBqeD2VrIne3Vtnr2BdoJrB6ZXZXR1jtkD5zU5GeeUG01pmLzGUvkstr4pR', NULL, '2017-09-28 00:45:58', '2017-09-28 03:37:48', NULL),
 (3, 1, 'test', 'test@gmail.com', '$2y$10$mz.9LOorarHonhn7twLPzOGltv5f2r/m/Qll3mjH.xomFJ0sQAEA2', 1, '2017-09-28 10:16:53', 'fwaHx33PB459US5MR7YPVVf54XGyQgxYL3LCyAlCiuBecxn1oiJAwNgZb0rD', NULL, '2017-09-28 03:38:42', '2017-09-28 03:39:54', NULL);
 
@@ -1081,7 +1101,33 @@ CREATE TABLE `blog_posts` (
 INSERT INTO `blog_posts` (`id`, `slug`, `title`, `short_description`, `content`, `category_id`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'test', 'TEST', 'TEST.........................', 'TEST.........................', 2, 1, '2017-09-27 06:11:18', '2017-09-27 06:22:21', '2017-09-27 06:22:21'),
 (3, 'test1111111', 'TEST1111111', 'TEST..........111111111', 'TESST...............111111111', 2, 1, '2017-09-27 07:24:20', '2017-09-27 07:24:20', NULL),
-(6, 'testssssssssssssssss', 'testssssssssssssssss', 'Fsdfssssssssdf', 'dggggggggggggggggggf', 3, 0, '2017-09-28 01:03:31', '2017-09-28 01:03:54', '2017-09-28 01:03:54');
+(6, 'testssssssssssssssss', 'testssssssssssssssss', 'Fsdfssssssssdf', 'dggggggggggggggggggf', 3, 0, '2017-09-28 01:03:31', '2017-09-28 01:03:54', '2017-09-28 01:03:54'),
+(7, 'title', 'title', 'short description', 'long discription', 3, 1, '2017-09-29 05:34:49', '2017-09-29 05:34:49', NULL),
+(8, 'this-is-title', 'this is title', 'aaaaaaaaaddddddddddddd', 'aaaaaaaaaaaaaaaaaaaaa', 3, 1, '2017-09-29 06:14:06', '2017-09-29 06:14:06', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_post_tags`
+--
+
+CREATE TABLE `blog_post_tags` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `post_id` int(10) UNSIGNED NOT NULL,
+  `tag_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `blog_post_tags`
+--
+
+INSERT INTO `blog_post_tags` (`id`, `post_id`, `tag_id`, `created_at`, `updated_at`) VALUES
+(3, 3, 2, NULL, NULL),
+(4, 3, 3, NULL, NULL),
+(5, 7, 1, NULL, NULL),
+(6, 7, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1105,7 +1151,8 @@ CREATE TABLE `blog_tags` (
 
 INSERT INTO `blog_tags` (`id`, `slug`, `title`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'admin', 'admin', 1, '2017-09-27 04:29:50', '2017-09-27 04:29:50', NULL),
-(2, 'test', 'Test', 0, '2017-09-28 01:02:27', '2017-09-28 01:02:38', '2017-09-28 01:02:38');
+(2, 'test', 'Test', 0, '2017-09-28 01:02:27', '2017-09-28 01:02:38', '2017-09-28 01:02:38'),
+(3, 'test2', 'test2', 1, '2017-09-29 06:15:26', '2017-09-29 06:15:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -1212,7 +1259,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (24, '2017_09_27_085639_create_blog_category', 4),
 (25, '2017_09_27_085706_create_blog_tag', 4),
 (26, '2017_09_27_085851_create_blog_post', 4),
-(27, '2017_09_28_095548_create_cms_page', 5);
+(27, '2017_09_28_095548_create_cms_page', 5),
+(28, '2017_09_29_112109_Create_blog_post_tags', 6),
+(29, '2017_09_29_112327_Add_foreign_key_to_blog_post_tags', 7);
 
 -- --------------------------------------------------------
 
@@ -1379,6 +1428,14 @@ ALTER TABLE `blog_posts`
   ADD KEY `blog_posts_category_id_foreign` (`category_id`);
 
 --
+-- Indexes for table `blog_post_tags`
+--
+ALTER TABLE `blog_post_tags`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `blog_post_tags_post_id_foreign` (`post_id`),
+  ADD KEY `blog_post_tags_tag_id_foreign` (`tag_id`);
+
+--
 -- Indexes for table `blog_tags`
 --
 ALTER TABLE `blog_tags`
@@ -1446,7 +1503,7 @@ ALTER TABLE `user_actions`
 -- AUTO_INCREMENT for table `admin_actions`
 --
 ALTER TABLE `admin_actions`
-  MODIFY `id` bigint(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` bigint(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `admin_groups`
 --
@@ -1461,7 +1518,7 @@ ALTER TABLE `admin_group_pages`
 -- AUTO_INCREMENT for table `admin_logs`
 --
 ALTER TABLE `admin_logs`
-  MODIFY `id` int(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=702;
+  MODIFY `id` int(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=722;
 --
 -- AUTO_INCREMENT for table `admin_users`
 --
@@ -1476,22 +1533,27 @@ ALTER TABLE `admin_user_types`
 -- AUTO_INCREMENT for table `blog_categories`
 --
 ALTER TABLE `blog_categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `blog_posts`
 --
 ALTER TABLE `blog_posts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `blog_post_tags`
+--
+ALTER TABLE `blog_post_tags`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `blog_tags`
 --
 ALTER TABLE `blog_tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `cms_pages`
 --
@@ -1506,7 +1568,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `states`
 --
@@ -1556,6 +1618,13 @@ ALTER TABLE `admin_user_rights`
 --
 ALTER TABLE `blog_posts`
   ADD CONSTRAINT `blog_posts_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `blog_categories` (`id`);
+
+--
+-- Constraints for table `blog_post_tags`
+--
+ALTER TABLE `blog_post_tags`
+  ADD CONSTRAINT `blog_post_tags_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `blog_posts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `blog_post_tags_tag_id_foreign` FOREIGN KEY (`tag_id`) REFERENCES `blog_tags` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `states`
