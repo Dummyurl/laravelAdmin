@@ -92,6 +92,8 @@ Route::group(['prefix' => $ADMIN_PREFIX], function(){
 
  	Route::any('cms-pages/data', 'admin\CmsPagesController@data')->name('cms-pages.data');
  	Route::resource('cms-pages', 'admin\CmsPagesController');
+
+ 				
         
     });    
 });

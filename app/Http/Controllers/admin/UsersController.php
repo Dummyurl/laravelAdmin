@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 use Datatables;
-
 use App\Models\User;
+
 class UsersController extends Controller
 {
     public function __construct() {
