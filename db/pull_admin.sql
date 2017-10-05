@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2017 at 03:01 PM
+-- Generation Time: Oct 05, 2017 at 07:05 AM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -921,7 +921,14 @@ INSERT INTO `admin_logs` (`id`, `adminuserid`, `actionid`, `actionvalue`, `remar
 (711, 1, 37, '8', 'Edit Blog Post::8', '::1', '2017-09-29 11:48:53', '2017-09-29 11:48:53'),
 (712, 1, 37, '3', 'Edit Blog Post::3', '::1', '2017-09-29 11:49:28', '2017-09-29 11:49:28'),
 (713, 1, 37, '7', 'Edit Blog Post::7', '::1', '2017-09-29 11:51:10', '2017-09-29 11:51:10'),
-(714, 1, 1, '1', 'Login Admin User', '::1', '2017-09-29 12:14:30', '2017-09-29 12:14:30');
+(714, 1, 1, '1', 'Login Admin User', '::1', '2017-09-29 12:14:30', '2017-09-29 12:14:30'),
+(715, 1, 1, '1', 'Login Admin User', '::1', '2017-10-01 09:39:26', '2017-10-01 09:39:26'),
+(716, 1, 37, '8', 'Edit Blog Post::8', '::1', '2017-10-01 09:40:10', '2017-10-01 09:40:10'),
+(717, 1, 37, '8', 'Edit Blog Post::8', '::1', '2017-10-01 09:40:38', '2017-10-01 09:40:38'),
+(718, 1, 37, '8', 'Edit Blog Post::8', '::1', '2017-10-01 09:40:56', '2017-10-01 09:40:56'),
+(719, 1, 1, '1', 'Login Admin User', '::1', '2017-10-01 09:50:35', '2017-10-01 09:50:35'),
+(720, 1, 1, '1', 'Login Admin User', '::1', '2017-10-02 04:39:54', '2017-10-02 04:39:54'),
+(721, 1, 2, '1', 'Logout Admin User', '::1', '2017-10-02 04:56:03', '2017-10-02 04:56:03');
 
 -- --------------------------------------------------------
 
@@ -949,7 +956,7 @@ CREATE TABLE `admin_users` (
 --
 
 INSERT INTO `admin_users` (`id`, `user_type_id`, `name`, `email`, `password`, `status`, `last_login_at`, `remember_token`, `slug`, `created_at`, `updated_at`, `phone`) VALUES
-(1, 1, 'Admin', 'admin@gmail.com', '$2y$10$GArb12qvi/byOeYWo2yRzehHkKHJ8bTh7hWA9Ga/MKu01f6e3lb5G', 1, '2017-09-29 06:44:30', 'lMuTadVYV9uYw7wZy5b8nszqrsaPwamzujjfgvvVHv4d1f4WKhkvRqBQvO5H', NULL, '2016-12-11 10:31:25', '2017-09-29 06:44:30', '1234567890'),
+(1, 1, 'Admin', 'admin@gmail.com', '$2y$10$GArb12qvi/byOeYWo2yRzehHkKHJ8bTh7hWA9Ga/MKu01f6e3lb5G', 1, '2017-10-02 04:56:03', 'kMSynTrVLtAKtJ1w5HmYymLzvbpRm4CQVmrfEBiAl1nzPNJtUkUFakJngPva', NULL, '2016-12-11 10:31:25', '2017-10-01 23:09:54', '1234567890'),
 (2, 1, 'Rinkal', 'rinkal@gmail.com', '$2y$10$ETAmrgTyObz8dhCmsSbJuuHq1sEcJP288esOC0R3IUyIB6oLaVgBy', 1, '2017-09-28 09:08:48', 'YMBqeD2VrIne3Vtnr2BdoJrB6ZXZXR1jtkD5zU5GeeUG01pmLzGUvkstr4pR', NULL, '2017-09-28 00:45:58', '2017-09-28 03:37:48', NULL),
 (3, 1, 'test', 'test@gmail.com', '$2y$10$mz.9LOorarHonhn7twLPzOGltv5f2r/m/Qll3mjH.xomFJ0sQAEA2', 1, '2017-09-28 10:16:53', 'fwaHx33PB459US5MR7YPVVf54XGyQgxYL3LCyAlCiuBecxn1oiJAwNgZb0rD', NULL, '2017-09-28 03:38:42', '2017-09-28 03:39:54', NULL);
 
@@ -1496,7 +1503,7 @@ ALTER TABLE `user_actions`
 -- AUTO_INCREMENT for table `admin_actions`
 --
 ALTER TABLE `admin_actions`
-  MODIFY `id` bigint(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` bigint(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `admin_groups`
 --
@@ -1511,7 +1518,7 @@ ALTER TABLE `admin_group_pages`
 -- AUTO_INCREMENT for table `admin_logs`
 --
 ALTER TABLE `admin_logs`
-  MODIFY `id` int(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=715;
+  MODIFY `id` int(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=722;
 --
 -- AUTO_INCREMENT for table `admin_users`
 --
@@ -1526,7 +1533,7 @@ ALTER TABLE `admin_user_types`
 -- AUTO_INCREMENT for table `blog_categories`
 --
 ALTER TABLE `blog_categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `blog_posts`
 --
@@ -1546,7 +1553,7 @@ ALTER TABLE `blog_tags`
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `cms_pages`
 --
