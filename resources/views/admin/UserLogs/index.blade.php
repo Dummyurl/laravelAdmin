@@ -8,7 +8,7 @@
 
         <div class="col-md-12">
             
-                  
+            @include($moduleViewName.".search")      
 
             <div class="clearfix"></div>    
             <div class="portlet box green">
@@ -28,7 +28,7 @@
                                <th width="10%">Ip Address</th>                           
                                <th width="20%">Remarks</th>                           
                                <th width="20%">Log Date</th>                           
-                               <th width="10%">#By Admin</br>#AdminName</th>
+                               
                             </tr>
                         </thead>                                         
                         <tbody>
@@ -70,18 +70,28 @@
                 "url": "{!! route($moduleRouteText.'.data') !!}",
                 "data": function ( data ) 
                 {
-                    data.search_text = $("#search-frm input[name='search_text']").val();
+                    data.search_start_date = $("#search-frm input[name='search_start_date']").val();
+                    data.search_end_date = $("#search-frm input[name='search_end_date']").val();
+                    data.search_id = $("#search-frm input[name='search_id']").val();
+                    data.search_userid = $("#search-frm select[name='search_userid']").val();
+                    data.search_actionid = $("#search-frm select[name='search_actionid']").val();
+                    data.search_action_value = $("#search-frm input[name='search_action_value']").val();
+                    data.search_remark = $("#search-frm input[name='search_remark']").val();
+                    data.search_address = $("#search-frm input[name='search_address']").val();
+                    data.search_ids = $("#search-frm input[name='search_ids']").val();
+                    data.search_admin_name = $("#search-frm input[name='search_admin_name']").val();
+                    data.search_distinct_user = $("#search-frm input[name='search_distinct_user']").val();
                 }
             },            
             "order": [[ 0, "desc" ]],    
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'userid', name: 'userid' },                                              
+                { data: 'name', name: 'userid' },                                              
                 { data: 'actionid', name: 'actionid' },                                              
-                { data: 'actionvalue', name: 'actionvalue' },                                              
+                { data: 'actionvalue', name: 'actionvalue' },    
                 { data: 'remark', name: 'remark' },                                              
-                { data: 'ipaddress', name: 'ipaddress' }                                              
-                             
+                { data: 'ipaddress', name: 'ipaddress' },
+                { data: 'created_at', name: 'created_at' }
             ]
         });        
 

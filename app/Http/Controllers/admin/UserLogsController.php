@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\UserLog;
 use App\Models\AdminAction;
+use Datatables;
+
 
 class UserLogsController extends Controller {
 
@@ -43,7 +45,8 @@ class UserLogsController extends Controller {
 
         $data = array();        
         $data['page_title'] = "Manage UserLog"; 
-
+        $data['users'] = \App\Models\User::pluck("name","id")->all();
+        $data['userAction'] = \App\Models\UserAction::pluck("description","id")->all();
         return view($this->moduleViewName.".index", $data);         
     }
     public function data(Request $requesst)
@@ -54,19 +57,12 @@ class UserLogsController extends Controller {
         {
             return $checkrights;
         }
+
+        $model = UserLog::select(TBL_USER_LOGS.".*",TBL_USERS.".firstname",TBL_USERS.".lastname",TBL_USERS_ACTION.".description")
+                ->join(TBL_USERS,TBL_USERS.".id",'=',TBL_USER_LOGS.".id")
+                ->join(TBL_USERS_ACTION,TBL_USERS_ACTION.".id",'=',TBL_USER_LOGS.".actionid");
         
             return Datatables::eloquent($model)
-               
-            ->addColumn('action', function(City $row) {
-                return view("admin.partials.action",
-                    [
-                        'currentRoute' => $this->moduleRouteText,
-                        'row' => $row, 
-                        'isEdit' => \App\Models\Admin::isAccess(\App\Models\Admin::$EDIT_CITY),
-                        'isDelete' =>\App\Models\Admin::isAccess(\App\Models\Admin::$DELETE_CITY),                                                        
-                    ]
-                )->render();
-            })
 
             ->editColumn('created_at', function($row){
                 
@@ -81,23 +77,28 @@ class UserLogsController extends Controller {
                 $search_start_date = trim(request()->get("search_start_date"));                    
                 $search_end_date = trim(request()->get("search_end_date"));
                 $search_id = request()->get("search_id");
-                $search_city = request()->get("search_city");                                       
-                $search_state = request()->get("search_state");                                     
-                $search_country = request()->get("search_country");               
+                $search_userid = request()->get("search_userid");
+                $search_actionid = request()->get("search_actionid");
+                $search_action_value = request()->get("search_action_value");
+                $search_remark = request()->get("search_remark");
+                $search_address = request()->get("search_address");
+                $search_ids = request()->get("search_ids");
+                $search_admin_name = request()->get("search_admin_name");
+                $search_distinct_user = request()->get("search_distinct_user");
 
                 if (!empty($search_start_date)){
 
                     $from_date=$search_start_date.' 00:00:00';
                     $convertFromDate= $from_date;
 
-                    $query = $query->where(TBL_CITY.".created_at",">=",addslashes($convertFromDate));
+                    $query = $query->where(TBL_USER_LOGS.".created_at",">=",addslashes($convertFromDate));
                 }
                 if (!empty($search_end_date)){
 
                     $to_date=$search_end_date.' 23:59:59';
                     $convertToDate= $to_date;
 
-                    $query = $query->where(TBL_CITY.".created_at","<=",addslashes($convertToDate));
+                    $query = $query->where(TBL_USER_LOGS.".created_at","<=",addslashes($convertToDate));
                 }
                 if(!empty($search_id))
                 {
@@ -105,23 +106,10 @@ class UserLogsController extends Controller {
                     $idArr = array_filter($idArr);                
                     if(count($idArr)>0)
                     {
-                        $query = $query->whereIn(TBL_CITY.".id",$idArr);
+                        $query = $query->whereIn(TBL_USER_LOGS.".id",$idArr);
                     } 
-                }                                
-
-                if(!empty($search_city))
-                {
-                    $query = $query->where(TBL_CITY.".title", 'LIKE', '%'.$search_city.'%');
-                }                                                       
-                if(!empty($search_state))
-                {
-                    $query = $query->where(TBL_CITY.".state_id", $search_state);
                 } 
-                if(!empty($search_country))
-                {
-                    $query = $query->where(TBL_STATE.".country_id", $search_country);
-                }  
-                                                                   
+
             })->make(true);     
     } 
 

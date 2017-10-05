@@ -92,12 +92,12 @@ class Admin extends Authenticatable
     public static $DELETE_ADMIN_USERS = 50;    
     public static $CHANGE_PASSWORD_ADMIN_USERS = 51;
 
-    public static $LIST_CMS_PAGES = 35;
-    public static $ADD_CMS_PAGES = 36;
-    public static $EDIT_CMS_PAGES = 37;
-    public static $DELETE_CMS_PAGES = 38;  
+    public static $LIST_CMS_PAGES = 52;
+    public static $ADD_CMS_PAGES = 53;
+    public static $EDIT_CMS_PAGES = 54;
+    public static $DELETE_CMS_PAGES = 55;  
     
-    public static $LIST_USER_LOGS = 39;  
+    public static $LIST_USER_LOGS = 56;  
 
 
     /**
