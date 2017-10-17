@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 use Datatables;
-use App\models\AdminLog;
+use App\Models\AdminLog;
 use App\Models\AdminAction;
 
 class AdminUserLogsController extends Controller {
